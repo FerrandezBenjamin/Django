@@ -49,7 +49,7 @@ class QuestionIndexViewTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_past_question(self):
-        past_question = self.create_question(question_text='Past Question.', days =-5)
+        past_question = self.create_question(question_text='Past Question.', days=-5)
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
@@ -78,8 +78,8 @@ class QuestionIndexViewTest(TestCase):
         )
 
     def test_two_question(self):
-        self.create_question(question_text="Past question1.", days =-30)
-        self.create_question(question_text="Past question 2.", days =-5)
+        self.create_question(question_text="Past question1.", days=-30)
+        self.create_question(question_text="Past question 2.", days=-5)
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
